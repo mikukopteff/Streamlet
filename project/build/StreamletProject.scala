@@ -14,7 +14,7 @@ class StreamletProject(info: ProjectInfo) extends DefaultProject(info) with Idea
   val mockitoCore = "org.mockito" % "mockito-core" % "1.8.5" % "test"
 
 
-  val streamAppName = "mystreamapp"
+  val streamAppName = "vod"
   override def artifactID = streamAppName
   val streamServerLocation = "/usr/local/WowzaMediaServer/"
   val streamAppConfLocation = "src/main/streamapp/"
@@ -28,9 +28,9 @@ class StreamletProject(info: ProjectInfo) extends DefaultProject(info) with Idea
     FileUtilities.createDirectory(new File(streamServerLocation + "applications/" + streamAppName), log)
     
     //copy common configuration files
-    new File (streamAppConfLocation + confFolder +"local/").
-      listFiles.filter(file => !file.isDirectory() && !file.getName.startsWith(".svn")).foreach(fileToCopy =>
-      FileUtilities.copyFile(fileToCopy, new File(streamServerLocation + confFolder + "/" + fileToCopy.getName), log))
+    //new File (streamAppConfLocation).
+    //  listFiles.filter(file => !file.isDirectory() && !file.getName.startsWith(".svn")).foreach(fileToCopy =>
+    //  FileUtilities.copyFile(fileToCopy, new File(streamServerLocation + confFolder + "/" + fileToCopy.getName), log))
     
     List(streamAppName).foreach {appName =>
       //Create configuration folder for Wowza using the environment local
@@ -38,14 +38,14 @@ class StreamletProject(info: ProjectInfo) extends DefaultProject(info) with Idea
       if (targetFolder.exists) targetFolder.listFiles.foreach(_.delete)
       targetFolder.delete
       FileUtilities.createDirectory(targetFolder, log)
-      new File (streamAppConfLocation + confFolder +"local/" + appName).
+      new File (streamAppConfLocation).
         listFiles.filter(!_.getName.startsWith(".svn")).foreach(fileToCopy =>
         FileUtilities.copyFile(fileToCopy, new File(targetFolder + "/" + fileToCopy.getName), log))
     }
 
     new File(managedDependencyPath + "/compile").listFiles.foreach(file =>
       FileUtilities.copyFile(file, new File(streamServerLocation + jarDeployLocation + file.getName), log))
-    FileUtilities.copyFile(new File("project/boot/scala-2.8.1/lib/scala-library.jar"), new File(streamServerLocation + jarDeployLocation + "/scala-library-2.8.1.jar"), log)
+    FileUtilities.copyFile(new File("project/boot/scala-2.9.1/lib/scala-library.jar"), new File(streamServerLocation + jarDeployLocation + "/scala-library-2.9.1.jar"), log)
     //Copy jar containing module files
     FileUtilities.copyFile(jarPath.asFile, new File(streamServerLocation + jarDeployLocation + jarPath.asFile.getName), log)
   }
