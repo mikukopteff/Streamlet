@@ -1,1 +1,1 @@
-Microframework for making streaming apps in  Scala.
+Microframework for making streaming apps for Wowza in Scala based on Sinatra, Scalatra and this blogpost (http://www.riffraff.info/2009/4/11/step-a-scala-web-picoframework).
