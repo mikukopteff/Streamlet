@@ -122,7 +122,7 @@
             <Module>
 	<Name>vod</Name>
 	<Description>Test</Description>
-	<Class>streamlet.StreamletForWowza</Class>
+	<Class>streamlet.StreamletExample</Class>
 </Module>
 		</Modules>
 		<!-- Properties defined here will be added to the IApplication.getProperties() and IApplicationInstance.getProperties() collections -->

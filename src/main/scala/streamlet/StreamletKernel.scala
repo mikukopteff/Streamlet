@@ -3,7 +3,7 @@ package streamlet
 import scala.util.DynamicVariable
 import scala.collection.mutable.HashMap
 
-abstract class Streamlet {
+trait Streamlet {
 
   type Params = java.util.Map[String,Array[String]]
   val Map = new HashMap[(String, String), ( Any => String)]()
@@ -18,11 +18,11 @@ abstract class Streamlet {
         //}
       }
        catch {
-         case ex:NoSuchElementException => println("requesting "+request+" "+ fun+" but only have "
+         case ex:NoSuchElementException => throw new IllegalStateException("requesting "+request+" "+ fun+" but only have "
                                                    +Map)
        }
   }
 
-  def play()(fun: =>Any) = Map.put(("play", ""), x => fun.toString)
+  def play()(fun: => Any) = Map.put(("play", ""), x => fun.toString)
   def function(name: String)(fun: => Any) = Map.put(("function", name), x => fun.toString)
 }

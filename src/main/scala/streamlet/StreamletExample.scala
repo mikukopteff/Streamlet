@@ -1,8 +1,12 @@
 package streamlet
 
-class StreamletExample extends Streamlet {
+class StreamletExample extends StreamletForWowza {
 
   function("myfunction") {
-    println("Jee")
+    println("my function called")
+  }
+
+  play(){
+    println("play called")
   }
 }

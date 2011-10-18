@@ -9,14 +9,13 @@ import com.wowza.wms.stream.IMediaStream
 
 
 
-class StreamletForWowza extends ModuleBase with  IModuleOnCall with IModuleOnConnect with IModuleOnStream {
+class StreamletForWowza extends ModuleBase with  IModuleOnCall with IModuleOnConnect with IModuleOnStream with Streamlet {
 
 
 
 
   def onCall(handlerName: String, client: IClient,function: RequestFunction, params: AMFDataList) {
-    println("onCall: "+handlerName)
-    new StreamletExample().doServerSideFunction("function", handlerName)
+    doServerSideFunction("function", handlerName)
   }
 
   def onConnect(client: IClient, function: RequestFunction, params: AMFDataList) {
