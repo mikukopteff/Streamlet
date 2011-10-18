@@ -9,4 +9,12 @@ class StreamletExample extends StreamletForWowza {
   play(){
     println("play called")
   }
+
+  connect(){
+    println("client connected")
+  }
+
+  disconnect(){
+    println("disconnected client")
+  }
 }

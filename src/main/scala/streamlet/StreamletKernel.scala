@@ -18,11 +18,14 @@ trait Streamlet {
         //}
       }
        catch {
-         case ex:NoSuchElementException => throw new IllegalStateException("requesting "+request+" "+ fun+" but only have "
-                                                   +Map)
+         case ex:NoSuchElementException => println(request + " called - not mapped")
        }
   }
 
   def play()(fun: => Any) = Map.put(("play", ""), x => fun.toString)
   def function(name: String)(fun: => Any) = Map.put(("function", name), x => fun.toString)
+  def connect()(fun: => Any) = Map.put(("connect", ""), x => fun.toString)
+  def disconnect()(fun: => Any) = Map.put(("disconnect", ""), x => fun.toString)
+  def streamCreate()(fun: => Any) = Map.put(("streamCreate", ""), x => fun.toString)
+  def streamDestroy()(fun: => Any) = Map.put(("streamDestroy", ""), x => fun.toString)
 }

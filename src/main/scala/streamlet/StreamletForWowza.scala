@@ -14,16 +14,15 @@ class StreamletForWowza extends ModuleBase with  IModuleOnCall with IModuleOnCon
 
 
 
-  def onCall(handlerName: String, client: IClient,function: RequestFunction, params: AMFDataList) {
+  def onCall(handlerName: String, client: IClient,function: RequestFunction, params: AMFDataList) =
     doServerSideFunction("function", handlerName)
-  }
 
   def onConnect(client: IClient, function: RequestFunction, params: AMFDataList) {
-    println("onConnect")
+    doServerSideFunction("connect", "")
   }
 
   def onDisconnect(client: IClient ) {
-    println("onDisconnect")
+    doServerSideFunction("disconnect", "")
   }
 
   def onConnectAccept(client: IClient ) {
@@ -35,11 +34,16 @@ class StreamletForWowza extends ModuleBase with  IModuleOnCall with IModuleOnCon
   }
 
   def onStreamCreate(stream: IMediaStream ) {
-    println("onStreamCreate")
+    doServerSideFunction("streamCreate", "")
   }
   
   def onStreamDestroy(stream: IMediaStream ) {
-    println("onStreamDestroy")
+    doServerSideFunction("streamDestroy", "")
   }
+
+  def play(client: IClient, function: RequestFunction , params: AMFDataList) {
+    doServerSideFunction("play", "")
+		ModuleCore.play(client, function, params)
+	}
 
 }
